@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div>
+        <button id="btn" class="fb">Adicionar Ficha</button>
+    </div>
+
+    <div id="container-fichas">
+        <div class="fichas">
+            <h1 contenteditable="true">Segunda</h1>
+            <h2 contenteditable="true">Treino de Push</h2>
+            <textarea name="" id="" cols="4" rows="20">Seu treino aqui</textarea>
+            <button id="del" class="delete">Remover</button>
+        </div>
+    </div>
+
+{% endblock %}
