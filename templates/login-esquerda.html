@@ -1,0 +1,15 @@
+{% extends "login-base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div id="direito">
+        <h1>Faça o seu login.</h1>
+        <form action="">
+            <input type="text" placeholder="Usuário" required>
+            <input type="password" autocomplete="new-password" placeholder="Sua senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="{{ url_for('inicio') }}">Não possui conta? Clique aqui</a>
+     </div>
+{% endblock %}
