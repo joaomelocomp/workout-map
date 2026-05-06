@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+</head>
+<body>
+    <div id="main">
+        <div id="esquerdo">
+            <h1>Bem vindo de volta.</h1>
+            <form action="">
+                <p>Usuário:</p>
+                <input type="text" placeholder="Usuário">
+                <p>Senha:</p>
+                <input type="password" placeholder="Senha" autocomplete="new-password">
+                <button type="submit">Entrar</button>
+            </form>
+
+            <p class="fim">Workout Map - 2026</p>
+        </div>
+
+        <div id="direito">
+                <h1>Crie sua conta</h1>
+            <form action="">
+                <input type="text" placeholder="Usuário">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Senha" autocomplete="new-password">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

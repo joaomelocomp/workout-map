@@ -3,8 +3,44 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div>
+    <div class="btntr">
         <button id="btn" class="fb">Adicionar Ficha</button>
+        <button id="btnfichas" class="fb">Fichas prontas</button>
+    </div>
+
+    <div id="modal-overlay" style="display: none;">
+        <div id="modal-box">
+            <div class="modal-header">
+                <span>Escolha um modelo de treino</span>
+                <button id="modal-close">✕</button>
+            </div>
+            <div id="plan-grid">
+                <div class="plan-card" data-plan="ppl">
+                    <p class="plan-title">Push Pull Legs — 3x</p>
+                    <div><span class="tag push">Push</span><span class="tag pull">Pull</span><span class="tag legs">Legs</span></div>
+                    <p class="plan-sub">3 treinos/semana · ideal para iniciantes</p>
+                </div>
+                <div class="plan-card" data-plan="ul">
+                    <p class="plan-title">Upper Lower — 4x</p>
+                    <div><span class="tag upper">Upper</span><span class="tag lower">Lower</span></div>
+                    <p class="plan-sub">4 treinos/semana · equilíbrio</p>
+                </div>
+                <div class="plan-card" data-plan="fb">
+                    <p class="plan-title">Full Body — 3x</p>
+                    <div><span class="tag full">Full Body</span></div>
+                    <p class="plan-sub">3 treinos/semana · funcional</p>
+                </div>
+            </div>
+            <div id="days-preview" style="display: none;">
+                <hr>
+                <p class="plan-title" style="margin-bottom:12px;">Distribuição semanal</p>
+                <div id="days-grid"></div>
+                <div class="modal-footer">
+                    <button id="btn-voltar">Voltar</button>
+                    <button id="btn-usar">Usar esta ficha</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="container-fichas">
@@ -12,7 +48,7 @@
             <h1 contenteditable="true">Segunda</h1>
             <h2 contenteditable="true">Treino de Push</h2>
             <textarea name="" id="" cols="4" rows="20">Seu treino aqui</textarea>
-            <button id="del" class="delete">Remover</button>
+            <button class="delete">Remover</button>
         </div>
     </div>
 

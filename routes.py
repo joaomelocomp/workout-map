@@ -1,8 +1,11 @@
 from flask import render_template
 
 def init_app(app):
-
     @app.route('/')
+    def login():
+        return render_template('login.html')
+
+    @app.route('/home')
     def homepage():
         return render_template('home.html')
     
