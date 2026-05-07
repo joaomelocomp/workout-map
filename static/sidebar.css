@@ -7,7 +7,6 @@ html, body {
 .main {
     display: flex;
 
-    justify-content: center;
     align-items: center;
 
     height: 100vh;
@@ -26,13 +25,40 @@ html, body {
     background-color: black;
 }
 
+#side_links {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 250px;
+}
+
 .content {
+    box-sizing: border-box;
     flex: 1;
     padding: 20px;
     background: linear-gradient(45deg, black, rgb(39, 39, 39));
+    height: 100vh;
+}
 
+#f {
+    background-color: #85c6ff;
+    border-radius: 8px;
     margin: 10px;
 
+    width: 127px;
+    transition: 0.5s;
+
+    margin-top: auto;
+}
+
+#f a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+#f:hover {
+    width: 137px;
+    transition: 0.5s;
 }
 
 a {
