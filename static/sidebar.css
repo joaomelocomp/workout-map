@@ -76,7 +76,9 @@ a {
 
     width: 200px;
     height: 400px;
-    background-color: aliceblue;
+
+    border-radius: 8px;
+    background: linear-gradient(180deg, aliceblue, rgb(255, 255, 194))
 }
 
 .fichas h1 {
@@ -95,15 +97,55 @@ a {
     margin: 2px;
 }
 
-.fichas textarea {
-    margin: 10px;
+#exe {
+    margin: 4px;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+}
+#exe h1 {
+    font-weight: lighter;
 }
 
-.fb {
-    margin: 10px;
-    padding: 10px;
+#exe #exe {
+    margin: 4px;
+    font-size: 10px;
+}
 
-    text-decoration: none;
+.exe_tags {
+    display: inline-flex;
+    align-items: center;
+    gap: 107px;
+
+    background: #2a2a2a;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.exe_tags p {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+}
+
+.exe_tags button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    background: #0F6E56;
+    color: #fff;
+    font-size: 11px;
+
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #container-fichas {
@@ -146,7 +188,7 @@ a {
 
     margin: 10px;
 
-    background-color: rgb(34, 34, 34);
+    background-color: #85c6ff;
     border-radius: 8px;
 }
 
@@ -158,7 +200,7 @@ a {
     outline: none;
     
     text-decoration: none;
-    background-color: #ebebeb;
+    background-color: #fff;
 
     width: 200px;
 
@@ -166,6 +208,20 @@ a {
     padding: 7px;
 
     transition: 0.5s;
+}
+
+#tipo {
+    display: flex;
+
+    align-self: center;
+    justify-content: center;
+
+    text-align: center;
+
+    width: 150px;
+
+    border-radius: 8px;
+    background: #EAF3DE; color: #3B6D11;
 }
 
 #modal-overlay {

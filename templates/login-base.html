@@ -6,14 +6,14 @@
     <title>Login</title>
     <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
 </head>
-<body>
+<body spellcheck="false">
     <div id="main">
         <div id="esquerdo">
             <h1>Seu progresso<br>começa aqui.</h1>
             <p class="fim">Workout Map - 2026</p>
         </div>
 
-        <div id="content">
+        <div id="content" spellcheck="false">
             {% block content %}{% endblock %}
         </div>
 </body>
