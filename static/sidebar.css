@@ -7,13 +7,16 @@ html, body {
 .main {
     display: flex;
 
-    align-items: center;
-
     height: 100vh;
     margin: 0px;
 }
 
 .sidebar {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+
+    overflow-y: auto;
     display: flex;
     flex-direction: column ;
 
@@ -38,6 +41,8 @@ html, body {
     padding: 20px;
     background: linear-gradient(45deg, black, rgb(39, 39, 39));
     height: 100vh;
+
+    overflow-y: auto;
 }
 
 #f {
@@ -78,7 +83,8 @@ a {
     height: auto;
 
     border-radius: 8px;
-    background: linear-gradient(180deg, aliceblue, rgb(255, 255, 194))
+    background: linear-gradient(180deg, aliceblue, rgb(255, 255, 194));
+    overflow-y: auto;
 }
 
 .fichas h1 {
@@ -243,6 +249,7 @@ a {
   margin: 10px;
 
   justify-content: left;
+  align-items: flex-start;
 }
 
 .fichas .delete {

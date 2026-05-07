@@ -35,6 +35,10 @@ def init_app(app):
     def treinos():
         return render_template('treinos.html')
     
+    @app.route('/status')
+    def frequencia():
+        return render_template('frequencia.html')  
+    
     @app.route('/sobre')
     def sobre():
         return render_template('sobre.html')

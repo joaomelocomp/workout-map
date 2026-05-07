@@ -3,7 +3,13 @@ const container = document.getElementById("container-fichas");
 
 function bindFicha(ficha) {
 
-    ficha.querySelector(".delete").addEventListener("click", () => ficha.remove());
+    ficha.querySelector(".delete").addEventListener("click", () => {
+    if (ficha !== document.querySelectorAll(".fichas")[0]) {
+        ficha.remove();
+    } else {
+        alert("Não é possivel deletar esta ficha.");
+    }
+});
 
     const addBtn = ficha.querySelector(".add_tag button");
     const addInput = ficha.querySelector(".add_tag input");
@@ -48,9 +54,10 @@ bindFicha(document.querySelector(".fichas"));
 
 btn.addEventListener("click", () => {
     const fichas = container.querySelectorAll(".fichas");
-    if (fichas.length < 5) {
+    if (fichas.length < 7) {
         const novaFicha = fichas[0].cloneNode(true);
         novaFicha.querySelector("h1").textContent = "Novo dia";
+        novaFicha.querySelector("h2").color = "#fff";
         novaFicha.querySelector("h2").textContent = "Novo treino";
         container.appendChild(novaFicha);
         bindFicha(novaFicha);
@@ -91,6 +98,9 @@ const plans = {
             "Stiff\nSupino Fechado\nRemada Unilateral\nDevelopment\nRosca Concentrada\nPanturrilha",
         ]
     },
+    default: {days: ["Segunda", "Quarta", "Sexta"], labels: ["Default", "Default", "Default"],
+        treinos: ["", "", ""]
+    } 
 };
 
 document.querySelectorAll(".plan-card").forEach(card => {
