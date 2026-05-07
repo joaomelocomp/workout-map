@@ -74,8 +74,8 @@ a {
     display: flex;
     flex-direction: column;
 
-    width: 200px;
-    height: 400px;
+    width: 300px;
+    height: auto;
 
     border-radius: 8px;
     background: linear-gradient(180deg, aliceblue, rgb(255, 255, 194))
@@ -117,7 +117,9 @@ a {
 .exe_tags {
     display: inline-flex;
     align-items: center;
-    gap: 107px;
+    gap: 1%;
+
+    margin-top: 1%;
 
     background: #2a2a2a;
     padding: 6px 10px;
@@ -135,17 +137,102 @@ a {
     outline: none;
     cursor: pointer;
 
-    background: #0F6E56;
+    background: #000000;
     color: #fff;
     font-size: 11px;
 
-    width: 18px;
+    width: 70px;
     height: 18px;
-    border-radius: 50%;
+    border-radius: 8px;
+
+    margin-left: auto;
 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.add_tag {
+    margin-top:  10px;
+    margin-bottom: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+
+    background: #2a2a2a;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.add_tag button {
+    cursor: pointer;
+
+    font-size: 10px;
+
+    border: none;
+    outline: none;
+    
+    color: aliceblue;
+    text-decoration: none;
+    background-color: #000000;
+
+    width: 100px;
+
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.5s;
+}
+
+.add_tag input {
+    padding: 7px;
+    width: 200px;
+
+    border: 1px solid transparent;
+    outline: none;
+
+    color: whitesmoke;
+
+    margin: 5px;
+    transition: 0.5s;
+
+    background-color: transparent;
+}
+
+.add_tag input:hover {transition: 0.5s; border: 1px solid whitesmoke;}
+
+.container_series {
+    display: flex;
+    justify-content: center;
+    
+    width: 100%;
+    height: auto;
+
+    border-radius: 8px;
+    margin-top: auto;
+    gap: 4px;
+    background-color: #2a2a2a;
+}
+
+.series {
+    display: flex;
+    font-weight: lighter;
+    font-size: 10px;
+
+    margin: 10px;
+
+    justify-content: center;
+    align-content: center;
+
+    background: linear-gradient(45deg, #2a2a2a, #494949);
+
+    color: #fff;
+
+    width: 80px;
+    height: 70px;
+
+    border-radius: 10px;
 }
 
 #container-fichas {

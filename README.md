@@ -11,6 +11,8 @@ Tecnologias
 
 Python / Flask
 HTML, CSS, JavaScript
-SQLite
+SQL
 
 <img src="static\print_homepage.png" width="500">
+<img src="static\print_opcoes.png" width="500">
+<img src="static\print_fichas.png" width="500">
