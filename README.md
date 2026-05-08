@@ -1,17 +1,26 @@
-Workout Map
-Aplicação web para gerenciamento de treinos, desenvolvida com Flask e Python.
-Funcionalidades
+# WorkoutMap
 
-Cadastro e login de usuários
-Criação e remoção de fichas de treino personalizadas
-Fichas prontas para facilitar o início
-Acompanhamento de frequência de treinos
+App para criar e gerenciar fichas de treino personalizadas.
 
-Tecnologias
+## Funcionalidades
 
-Python / Flask
-HTML, CSS, JavaScript
-SQL
+- Cadastro e login de usuários
+- Criação de até 7 fichas de treino
+- Adicionar e remover exercícios por ficha
+- Cálculo automático do tempo estimado de treino
+- Planos prontos: PPL, Upper/Lower, Full Body
+- Fichas salvas automaticamente no navegador
+
+## Stack
+
+- Python / Flask
+- PostgreSQL
+- JavaScript
+- HTML / CSS
+
+## Deploy
+
+Hospedado no Render com banco PostgreSQL.
 
 <img src="prints\print_homepage.png" width="500">
 <img src="prints/print_homepage.png" width="500">
