@@ -1,24 +1,33 @@
 const btn = document.getElementById("btn");
 const container = document.getElementById("container-fichas");
 
-function bindFicha(ficha) {
-
-    ficha.querySelector(".delete").addEventListener("click", () => {
-    if (ficha !== document.querySelectorAll(".fichas")[0]) {
-        ficha.remove();
-    } else {
-        alert("Não é possivel deletar esta ficha.");
-    }
-});
-
-    const addBtn = ficha.querySelector(".add_tag button");
-    const addInput = ficha.querySelector(".add_tag input");
-    addBtn.addEventListener("click", () => adicionarTag(ficha, addInput.value.trim()));
-    addInput.addEventListener("keydown", e => { if (e.key === "Enter") adicionarTag(ficha, addInput.value.trim()); });
-
-    ficha.querySelectorAll(".exe_tags button").forEach(b => {
-        b.addEventListener("click", () => b.closest(".exe_tags").remove());
+function salvarFichas() {
+    const fichas = [];
+    container.querySelectorAll('.fichas').forEach(ficha => {
+        const exercicios = [];
+        ficha.querySelectorAll('.exe_tags p').forEach(p => exercicios.push(p.textContent));
+        fichas.push({
+            titulo: ficha.querySelector('h1').textContent,
+            subtitulo: ficha.querySelector('h2').textContent,
+            exercicios: exercicios
+        });
     });
+    localStorage.setItem('fichas', JSON.stringify(fichas));
+}
+
+function calcularTempo(fichaElement) {
+    const exercicios = fichaElement.querySelectorAll('.exe_tags').length;
+    const minutos = exercicios * 7;
+    const horas = Math.floor(minutos / 60);
+    const mins = minutos % 60;
+    if (exercicios == 0) return 'None';
+    if (horas > 0) return `${horas}h${mins > 0 ? mins + 'min' : ''}`;
+    return `${minutos}min`;
+}
+
+function atualizarTempo(ficha) {
+    const tempo = ficha.querySelector('.tempo-treino');
+    if (tempo) tempo.textContent = calcularTempo(ficha);
 }
 
 function adicionarTag(ficha, nome) {
@@ -29,10 +38,16 @@ function adicionarTag(ficha, nome) {
     const tag = document.createElement("div");
     tag.className = "exe_tags";
     tag.innerHTML = `<p>${nome}</p><button>X</button>`;
-    tag.querySelector("button").addEventListener("click", () => tag.remove());
+    tag.querySelector("button").addEventListener("click", () => {
+        tag.remove();
+        atualizarTempo(ficha);
+        salvarFichas();
+    });
 
     exeDiv.insertBefore(tag, addTagEl);
     ficha.querySelector(".add_tag input").value = "";
+    atualizarTempo(ficha);
+    salvarFichas();
 }
 
 function adicionarExercicios(ficha, lista) {
@@ -45,22 +60,75 @@ function adicionarExercicios(ficha, lista) {
         const tag = document.createElement("div");
         tag.className = "exe_tags";
         tag.innerHTML = `<p>${nome.trim()}</p><button>X</button>`;
-        tag.querySelector("button").addEventListener("click", () => tag.remove());
+        tag.querySelector("button").addEventListener("click", () => {
+            tag.remove();
+            atualizarTempo(ficha);
+            salvarFichas();
+        });
         exeDiv.insertBefore(tag, addTagEl);
+    });
+    atualizarTempo(ficha);
+}
+
+function bindFicha(ficha) {
+    ficha.querySelector(".delete").addEventListener("click", () => {
+        if (ficha !== container.querySelectorAll(".fichas")[0]) {
+            ficha.remove();
+            salvarFichas();
+        } else {
+            alert("Não é possivel deletar esta ficha.");
+        }
+    });
+
+    const addBtn = ficha.querySelector(".add_tag button");
+    const addInput = ficha.querySelector(".add_tag input");
+    addBtn.addEventListener("click", () => adicionarTag(ficha, addInput.value.trim()));
+    addInput.addEventListener("keydown", e => {
+        if (e.key === "Enter") adicionarTag(ficha, addInput.value.trim());
+    });
+
+    ficha.querySelectorAll(".exe_tags button").forEach(b => {
+        b.addEventListener("click", () => {
+            b.closest(".exe_tags").remove();
+            atualizarTempo(ficha);
+            salvarFichas();
+        });
+    });
+
+    atualizarTempo(ficha);
+}
+
+function carregarFichas() {
+    const salvo = localStorage.getItem('fichas');
+    if (!salvo) return;
+
+    const fichas = JSON.parse(salvo);
+    const fichaBase = container.querySelector('.fichas');
+
+    fichas.forEach((dados, i) => {
+        let ficha = i === 0 ? fichaBase : fichaBase.cloneNode(true);
+        ficha.querySelector('h1').textContent = dados.titulo;
+        ficha.querySelector('h2').textContent = dados.subtitulo;
+        adicionarExercicios(ficha, dados.exercicios.join('\n'));
+        if (i > 0) {
+            container.appendChild(ficha);
+        }
+        bindFicha(ficha);
     });
 }
 
-bindFicha(document.querySelector(".fichas"));
+carregarFichas();
+bindFicha(container.querySelector(".fichas"));
 
 btn.addEventListener("click", () => {
     const fichas = container.querySelectorAll(".fichas");
     if (fichas.length < 7) {
         const novaFicha = fichas[0].cloneNode(true);
         novaFicha.querySelector("h1").textContent = "Novo dia";
-        novaFicha.querySelector("h2").color = "#fff";
         novaFicha.querySelector("h2").textContent = "Novo treino";
         container.appendChild(novaFicha);
         bindFicha(novaFicha);
+        salvarFichas();
     } else {
         alert("Fichas máximas atingidas!");
     }
@@ -98,9 +166,9 @@ const plans = {
             "Stiff\nSupino Fechado\nRemada Unilateral\nDevelopment\nRosca Concentrada\nPanturrilha",
         ]
     },
-    default: {days: ["Segunda", "Quarta", "Sexta"], labels: ["Default", "Default", "Default"],
+    default: { days: ["Segunda", "Quarta", "Sexta"], labels: ["Default", "Default", "Default"],
         treinos: ["", "", ""]
-    } 
+    }
 };
 
 document.querySelectorAll(".plan-card").forEach(card => {
@@ -117,10 +185,11 @@ document.querySelectorAll(".plan-card").forEach(card => {
             adicionarExercicios(ficha, treinos[i]);
             if (i > 0) {
                 container.appendChild(ficha);
-                bindFicha(ficha);
             }
+            bindFicha(ficha);
         });
 
+        salvarFichas();
         modal_close();
     });
 });

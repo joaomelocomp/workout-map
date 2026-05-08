@@ -3,10 +3,6 @@ import os
 from dotenv import load_dotenv
 from psycopg2 import Error
 
-import psycopg2
-import os
-from dotenv import load_dotenv
-
 load_dotenv()
 
 def conectar():
@@ -68,3 +64,53 @@ def inserir_usuario(user, email, senha):
 cursor = conn.cursor()
 cursor.execute("SELECT * FROM workoutmap")
 print(cursor.fetchall())'''
+
+def buscar_usuario(user, senha):
+    conn = conectar()
+    if not conn:
+        return False
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT usuario FROM users 
+            WHERE usuario = %s AND senha = %s
+        """, (user, senha))
+        
+        resultado = cursor.fetchone()
+        return resultado is not None
+
+    except Error as e:
+        print(f"Erro ao buscar usuário: {e}")
+        return False
+
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        conn.close()
+
+def criar_tabela():
+    conn = conectar()
+    if not conn:
+        return
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                usuario VARCHAR(50) UNIQUE NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                senha VARCHAR(255) NOT NULL
+            )
+        """)
+        conn.commit()
+        print("Tabela criada com sucesso!")
+
+    except Error as e:
+        print(f"Erro ao criar tabela: {e}")
+
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        conn.close()
